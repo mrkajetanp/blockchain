@@ -18,6 +18,28 @@ contract SimplePaymentChannel {
         return recoverSigner(message, signature) == sender;
     }
 
+    // the recipient can close the channel at any time, get the amount and send the remainder back
+    function close(uint256 amount, bytes memory signature) public {
+        require(msg.sender == recipient);
+        require(isValidSignature(amount, signature));
+        recipient.transfer(amount);
+        selfdestruct(sender);
+    }
+
+    // the sender can extend the expiration at any time
+    function extend(uint256 newExpiration) public {
+        require(msg.sender == sender);
+        require(newExpiration > expiration);
+        expiration = newExpiration;
+    }
+
+    // if the timeout is reached without the recipient claiming the funds
+    // Ether is released back to the sender
+    function claimTimeout() public {
+        require(now >= expiration);
+        selfdestruct(sender);
+    }
+
     function splitSignature(bytes memory sig) internal pure returns (uint8 v, bytes32 r, bytes32 s) {
         require(sig.length == 65);
 
