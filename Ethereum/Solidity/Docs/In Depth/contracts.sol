@@ -5,6 +5,8 @@ contract OwnedToken {
     address owner;
     bytes32 name;
 
+    uint constant x = 4;
+
     constructor(bytes32 _name) public {
         owner = msg.sender;
         creator = TokenCreator(msg.sender);
