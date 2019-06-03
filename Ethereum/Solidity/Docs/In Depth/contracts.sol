@@ -40,3 +40,7 @@ contract TokenCreator {
         return keccak256(abi.encodePacked(currentOwner, newOwner))[0] == 0x7f;
     }
 }
+
+contract Sink {
+    function() external payable { }
+}
