@@ -44,3 +44,7 @@ contract TokenCreator {
 contract Sink {
     function() external payable { }
 }
+
+contract Feline {
+    function utterance() public returns (bytes32);
+}
