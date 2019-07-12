@@ -1,3 +1,5 @@
+[Blockchain] Deeper theoreticals 
+
 [Libra] General theory 
 
 [Libra] Transaction lifecycle 
