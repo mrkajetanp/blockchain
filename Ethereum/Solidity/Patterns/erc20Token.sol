@@ -41,7 +41,7 @@ contract ExampleToken is ERC20Interface {
         emit Transfer(msg.sender, receiver, numTokens);
         return true;
     }
-
+                                                    
     function approve(address delegate, uint numTokens) public returns (bool) {
         allowed[msg.sender][delegate] = numTokens;
         emit Approval(msg.sender, delegate, numTokens);
