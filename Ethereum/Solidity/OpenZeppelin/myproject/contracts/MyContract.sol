@@ -7,6 +7,12 @@ contract MyContract is Ownable {
 
 }
 
+contract ERC20WithMinerReward is ERC20 {
+    function mintMinerReward() public {
+        _mint(block.coinbase, 1000);
+    }
+}
+
 contract GLDToken is ERC777 {
     constructor(
         uint256 initialSupply,
