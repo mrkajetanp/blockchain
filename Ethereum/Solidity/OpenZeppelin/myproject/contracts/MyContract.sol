@@ -13,6 +13,17 @@ contract ERC20WithMinerReward is ERC20 {
     }
 }
 
+contract ERC20WithAutoMinerReward is ERC20 {
+    function _mintMinerReward() internal {
+        _mint(block.coinbase, 1000);
+    }
+
+    function _transfer(address from, address to, uint256 value) internal {
+        _mintMinerReward();
+        super._transfer(from, to, value);
+    }
+}
+
 contract GLDToken is ERC777 {
     constructor(
         uint256 initialSupply,
